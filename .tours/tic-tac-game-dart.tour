@@ -1,0 +1,21 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Tic Tac Game Dart",
+  "steps": [
+    {
+      "file": "lib/Model/board.dart",
+      "description": "Initialize Tic Tac Toe Board with user defined board size",
+      "line": 9
+    },
+    {
+      "file": "lib/Model/board.dart",
+      "description": "place element in the user defined place\r\n",
+      "line": 13
+    },
+    {
+      "file": "lib/Model/board.dart",
+      "description": "Checks condition for winner",
+      "line": 40
+    }
+  ]
+}
