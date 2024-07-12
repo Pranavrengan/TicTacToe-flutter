@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
@@ -14,16 +16,17 @@ class Gamepage extends StatefulWidget {
 class _GamepageState extends State<Gamepage> {
   late List<bool> lst;
   int gridSize = 3;
-  int clicks = 0;
-  
+  GameBoard gameBoard = GameBoard();
+  int currentPlayer = 1;
 
   @override
   void initState() {
     super.initState();
+    gameBoard.initializeBoard(boardSize: gridSize);
     lst = List<bool>.filled(gridSize * gridSize, false);
-
   }
 
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,11 +48,11 @@ class _GamepageState extends State<Gamepage> {
               context,
               PageTransition(
                 type: PageTransitionType.fade,
-                child: Homepage(),
+                child: const Homepage(),
               ),
             );
           },
-          child: Icon(
+          child: const Icon(
             Icons.arrow_back_ios_new_rounded,
             size: 25,
             color: Colors.white,
@@ -71,9 +74,35 @@ class _GamepageState extends State<Gamepage> {
               return Padding(
                 padding: const EdgeInsets.all(10),
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    if (!lst[index] && !gameBoard.gameOver) {
+                      setState(() {
+                        if (gameBoard.placingElement(currentPlayer, index)) {
+                          lst[index] = true;
+                          currentPlayer = currentPlayer == 1 ? 2 : 1;
+                        }
+                      });
+                      if (gameBoard.gameOver) {}
+                    }
+                  },
                   child: Container(
                     color: Colors.white,
+                    child: Center(
+                      child: Text(
+                        gameBoard.board[index] == 0
+                            ? ""
+                            : gameBoard.board[index] == 1
+                                ? "X"
+                                : "O",
+                        style: TextStyle(
+                          fontSize: 54,
+                          fontWeight: FontWeight.bold,
+                          color: gameBoard.board[index] == 1
+                              ? Colors.red
+                              : Colors.blue,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               );
