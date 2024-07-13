@@ -5,9 +5,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tic_tac_toe_flutter/Model/board.dart';
 import 'package:tic_tac_toe_flutter/Pages/HomePage.dart';
+import 'package:tic_tac_toe_flutter/Pages/RestartPage.dart';
 
 class Gamepage extends StatefulWidget {
-  const Gamepage({Key? key}) : super(key: key);
+  const Gamepage({super.key});
 
   @override
   State<Gamepage> createState() => _GamepageState();
@@ -26,7 +27,6 @@ class _GamepageState extends State<Gamepage> {
     lst = List<bool>.filled(gridSize * gridSize, false);
   }
 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,29 +79,45 @@ class _GamepageState extends State<Gamepage> {
                       setState(() {
                         if (gameBoard.placingElement(currentPlayer, index)) {
                           lst[index] = true;
-                          currentPlayer = currentPlayer == 1 ? 2 : 1;
+                          currentPlayer = (currentPlayer == 1) ? 2 : 1;
                         }
                       });
-                      if (gameBoard.gameOver) {}
+                      if (gameBoard.gameOver) {
+                        Navigator.push(
+                          context,
+                          PageTransition(
+                            type: PageTransitionType.fade,
+                            child: RestartPage(winner: GameBoard.winner),
+                          ),
+                        );
+                      }
+                      else if (!lst.contains(false)) {
+                         Navigator.push(
+                          context,
+                          PageTransition(
+                            type: PageTransitionType.fade,
+                            child: const RestartPage(winner: 0),
+                          ),
+                        );
+                      }
                     }
                   },
                   child: Container(
                     color: Colors.white,
                     child: Center(
                       child: Text(
-                        gameBoard.board[index] == 0
-                            ? ""
-                            : gameBoard.board[index] == 1
-                                ? "X"
-                                : "O",
-                        style: TextStyle(
-                          fontSize: 54,
-                          fontWeight: FontWeight.bold,
-                          color: gameBoard.board[index] == 1
-                              ? Colors.red
-                              : Colors.blue,
-                        ),
-                      ),
+                          gameBoard.board[index] == 0
+                              ? ""
+                              : gameBoard.board[index] == 1
+                                  ? "X"
+                                  : "O",
+                          style: GoogleFonts.poppins(
+                            color: gameBoard.board[index] == 1
+                                ? Colors.red
+                                : Colors.blue,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 60,
+                          ),),
                     ),
                   ),
                 ),

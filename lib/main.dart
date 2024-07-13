@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tic_tac_toe_flutter/Pages/GamePage.dart';
-// import 'package:tic_tac_toe_flutter/Pages/HomePage.dart';
+import 'package:tic_tac_toe_flutter/Pages/HomePage.dart';
+
 
 void main() {
   runApp(const MainApp());
@@ -12,8 +12,10 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
     
-      home: Gamepage(),
+      home: Homepage(),
+      
     );
   }
 }
