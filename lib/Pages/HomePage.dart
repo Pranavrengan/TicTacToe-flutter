@@ -1,5 +1,4 @@
-// ignore: file_names
-// ignore_for_file: prefer_const_constructors
+
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,7 +21,7 @@ class _HomepageState extends State<Homepage> {
         child: Container(
           height: 500,
           width: 500,
-          decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
+          decoration: BoxDecoration(border: Border.all(color: Colors.white24)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
